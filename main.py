@@ -6,6 +6,14 @@ app = Flask (__name__)
 @app.route("/")
 def index():
     return render_template("index.html")
+@app.route("/alumnos")
+def alumnos():
+    titulo = "UTL por simpre"
+    nombres = ["Eduardo ","Ulises","Hernandez","Medina"]
+    return render_template("alumnos.html",titulo = titulo, nombres = nombres)
+@app.route("/maestros")
+def maestros():
+    return render_template("maestros.html")
 
 
 @app.route("/hola")
