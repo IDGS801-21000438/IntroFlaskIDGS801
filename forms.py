@@ -1,11 +1,15 @@
-from wtforms import Form,StringField, TelField
+from wtforms import Form,StringField, EmailField, TelField, IntegerField
+
 
 
 
 class UserForm( Form ):
     nombre = StringField('nombre')
-    email = StringField('email')
+    email = EmailField('email')
     primerA = StringField('primerA')
+    edad = IntegerField('edad')
+
+
 
 
 

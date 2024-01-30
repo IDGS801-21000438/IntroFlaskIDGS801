@@ -1,7 +1,16 @@
-{%extends "layout.html"%} {%block container%}
-
+{%extends "layout.html"%} {%block container%} {%import "_macros.html" as
+macros%}
 <h1>Alumnos</h1>
-<h2>Siempre, simpre {{titulo}}</h2>
-{%for nom in nombres%}
-<h3>{{nom}}</h3>
-{%endfor%} {%endblock%}
+
+<form action="">
+  {{macros.datos("nombre", "NOMBRE")}} {{macros.datos("saldo", "SALDO")}}
+  {{macros.datos("apellido", "APELLIDO")}}
+</form>
+
+<form action="">
+  {{macros.camposNuevos(form.nombre)}} {{macros.camposNuevos(form.edad)}}
+
+  <input type="submit" id="" />
+</form>
+
+{{form.nombre}} {%endblock%}
