@@ -1,0 +1,9 @@
+
+Red
+Rojo
+Yellow
+Amarillo
+Blue
+Azul
+
+

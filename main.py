@@ -1,7 +1,24 @@
-from flask import Flask, render_template,request
+from flask import Flask, render_template,request,redirect
+from flask import flash, g
+from flask_wtf.csrf import CSRFProtect
 import forms 
 
 app = Flask (__name__)
+app.secret_key = 'Inali'
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html')
+
+@app.before_request
+def before_request():
+    g.nombre = 'Ulises'
+    print('before 1')
+
+@app.after_request
+def after_reques(response):
+    print('after <--->')
+    return response
 
 
 @app.route("/")
@@ -9,12 +26,58 @@ def index():
     return render_template("index.html")
 
 
+@app.route("/archivo", methods=['GET', 'POST'])
+def archivo():
+    resultado = None  
+    
+    if request.method == 'POST':
+        if 'action' in request.form:
+            if request.form['action'] == 'guardar':
+                ingles = request.form['ingles']
+                espanio = request.form['espanio']
+                
+                with open('idiomas.txt', 'a') as archivo:
+                    archivo.write(f"{ingles}\n{espanio}\n")
+
+            elif request.form['action'] == 'buscar':
+                buscar = request.form['buscar']
+                
+                with open('idiomas.txt', 'r') as archivo:
+                    palabras = archivo.read().splitlines()
+                    for i in range(0, len(palabras), 1):
+                        if palabras[i].lower() == buscar.lower():
+                            resultado = f"La palabra '{buscar}' corresponde a '{palabras[i+1]}'."
+                            break
+                    else:
+                        resultado = f"No se encontró una traducción para '{buscar}'."
+
+    return render_template("archivo.html", resultado=resultado)
+
+
 @app.route("/alumnos", methods= ['GET','POST'])
 def alumnos():
+    print('Alumnos : {}'.format(g.nombre))
     alumno_clase= forms.UserForm(request.form)
-    if request.method == 'POST':
-        pass 
-    return render_template("alumnos.html",form=alumno_clase)
+    nom = ''
+    ape=''
+    email=''
+    edad=''
+    if request.method == 'POST' and alumno_clase.validate():
+       
+        nom = alumno_clase.nombre.data
+        ape = alumno_clase.primerA.data
+        email = alumno_clase.email.data
+        edad = alumno_clase.edad.data
+
+        print("Nombre: {}".format(nom))
+        print("Apellido: {}".format(ape))
+        print("Email: {}".format(email))
+        print("Edad: {}".format(edad))
+
+        mensaje = 'Bienvendos {}'.format(nom)
+        flash(mensaje)
+
+    return render_template("alumnos.html",form=alumno_clase,nom=nom, primerA = ape, email = email, edad = edad )
 
 @app.route("/maestros")
 def maestros():

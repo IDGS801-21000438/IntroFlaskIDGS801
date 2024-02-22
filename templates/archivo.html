@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Archivo</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        padding: 20px;
+      }
+
+      form {
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      button[type="submit"] {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      button[type="submit"]:hover {
+        background-color: #45a049;
+      }
+
+      .resultado {
+        margin-top: 20px;
+        padding: 10px;
+        border-radius: 4px;
+        background-color: #f0f0f0;
+        border: 1px solid #ddd;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Archivo</h1>
+
+    <form action="/archivo" method="POST">
+      <input type="hidden" name="action" value="guardar" />
+      <div>
+        <label for="ingles">Ingles:</label>
+        <input type="text" id="ingles" name="ingles" value="" />
+      </div>
+      <div>
+        <label for="espanio">Español:</label>
+        <input type="text" id="espanio" name="espanio" value="" />
+      </div>
+      <button type="submit">Guardar palabras</button>
+    </form>
+
+    <form action="/archivo" method="POST">
+      <input type="hidden" name="action" value="buscar" />
+      <div>
+        <label for="buscar">Buscar:</label>
+        <input type="text" id="buscar" name="buscar" value="" />
+      </div>
+      <button type="submit">Buscar palabra</button>
+      <div class="resultado">{{resultado}}</div>
+    </form>
+  </body>
+</html>

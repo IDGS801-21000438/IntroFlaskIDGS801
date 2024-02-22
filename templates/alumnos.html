@@ -1,4 +1,4 @@
-{%extends "layout.html"%} {%block container%} {%import "_macros.html" as
+{%extends "layout2.html"%} {%block container%} {%import "_macros.html" as
 macros%}
 <h1>Alumnos</h1>
 
@@ -10,7 +10,10 @@ macros%}
 <form action="">
   {{macros.camposNuevos(form.nombre)}} {{macros.camposNuevos(form.edad)}}
 
-  <input type="submit" id="" />
+  <input type="submit" id="btn1" name="btn1" value="Registrar" />
 </form>
 
-{{form.nombre}} {%endblock%}
+<h1>Nombre: {{nom}}</h1>
+<h2>Apellido: {{ape}}</h2>
+<h2>Email: {{email}}</h2>
+{%endblock%}
